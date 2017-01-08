@@ -1,0 +1,67 @@
+{% extends "wiki/base.html" %}
+{% load wiki_tags i18n sekizai_tags static %}
+
+{% block wiki_pagetitle %}{% trans "Recent Changes" %}{% endblock %}
+
+
+
+{% block wiki_breadcrumbs %}
+<div id="article-breadcrumbs">
+  <ul class="breadcrumb pull-left">
+    <li><a href="{% url 'wiki:root' %}">Main Page</a></li>
+    <li class="active">Recent Changes</li>
+  </ul>
+</div>
+{% endblock %}
+
+{% block wiki_contents %}
+<div style="clear: left;">
+<h2>{% trans "Recent Changes" %}</h2>
+
+<ul>
+{% for article in articles %}
+  <li><a href="{{ article.get_absolute_url }}">{{ article.modified }}
+  <p><b>{{ article.current_revision.title }}</b>
+  <i>(Last changed by 
+    {% if article.current_revision.user.get_full_name.strip %}{{ article.current_revision.user.get_full_name }}{% else %}{{ article.current_revision.user.username }}{% endif %}
+    {% if article.current_revision.user_message.strip %} with message: {{ article.current_revision.user_message }}{% endif %}
+  )</i></p>
+  </li>
+{% endfor %}
+</ul>
+</div>
+
+{% addtoblock "css" %}
+<style type="text/css">
+  td.linenumber {
+    width: 20px;
+  }
+  tr.insert td {
+    background-color: #DFC;
+  }
+  tr.delete td {
+    background-color: #FDC;
+  }
+  tr.equal td {
+    background-color: #F2F2F2;
+  }
+
+  .diff-container td {
+    white-space: pre; font-family: monospace;
+  }
+  .diff-container td,
+  .diff-container th {
+    padding: 2px 7px;
+    border-right: 1px solid #DDD;
+  }
+  .diff-container td:last-child,
+  .diff-container th:last-child {
+    border-right: none;
+  }
+  .diff-container table {
+    border-top: 1px solid #DDD;
+  }
+</style>
+{% endaddtoblock %}
+
+{% endblock %}

@@ -14,7 +14,7 @@ pylibmc==1.5.1
 raven==5.27.0
 
 #Wiki
-wiki==0.1.2
+wiki==0.2.0
 
 # For testing
 django-nose==1.4.3

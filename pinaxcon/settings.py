@@ -209,7 +209,6 @@ INSTALLED_APPS = [
     "sorl.thumbnail",
     "wiki",
     "wiki.plugins.attachments",
-    "wiki.plugins.notifications",
     "wiki.plugins.images",
     "wiki.plugins.macros",
 
@@ -326,6 +325,33 @@ WIKI_CAN_READ = True
 WIKI_CAN_WRITE = True
 WIKI_CAN_DELETE = True
 WIKI_ACCOUNT_HANDLING = False
+WIKI_MARKDOWN_KWARGS = {
+    'extensions': [
+        'footnotes',
+        'attr_list',
+        'extra',
+        'codehilite',
+        'sane_lists',
+        'tables',
+        'wikilinks',
+    ]
+}
+
+WIKI_MARKDOWN_HTML_WHITELIST = [
+    'a',
+    'abbr',
+    'acronym',
+    'b',
+    'blockquote',
+    'code',
+    'em',
+    'i',
+    'li',
+    'ol',
+    'strong',
+    'ul',
+    'br'
+]
 
 # Production settings have their own file to override stuff here
 try:

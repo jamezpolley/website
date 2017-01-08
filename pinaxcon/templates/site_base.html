@@ -2,6 +2,7 @@
 {% load metron_tags %}
 {% load i18n %}
 {% load sitetree %}
+{% load sekizai_tags %}
 {# <!-- https://gist.github.com/geedmo/5682742--> #}
 <!DOCTYPE html>
 <html lang="en" class="no-js">
@@ -25,6 +26,7 @@
       <link rel="stylesheet" href="{% static 'css/site-0a247b924d.css' %}">
     {% endblock %}
 {% endblock %}
+{% render_block "css" %}
     <!--Twitter-->
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@linuxconfau">
@@ -131,5 +133,6 @@
 {% endblock %}
     {% block extra_body %}{% endblock %}
 {% endblock %}
+{% render_block "js" %}
   </body>
 </html>

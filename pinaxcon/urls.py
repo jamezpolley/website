@@ -12,7 +12,7 @@ from django_nyt.urls import get_pattern as get_nyt_pattern
 from django.contrib import admin
 
 import symposion.views
-
+import wiki_hacks 
 
 urlpatterns = [
     #url(r"^$", TemplateView.as_view(template_name="homepage.html"), name="home"),
@@ -40,7 +40,7 @@ urlpatterns = [
     url(r'^nested_admin/', include('nested_admin.urls')),
 
     # Wiki
-    url(r'^notifications/', get_nyt_pattern()),
+    url(r'^wiki/recent/', wiki_hacks.RecentChangesView.as_view(), name='wiki_recent_changes'),
     url(r'^wiki/', get_wiki_pattern()),
 
     # Default catch-all for wagtail pages.
