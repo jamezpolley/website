@@ -7,6 +7,7 @@ from django import template
 from django.conf import settings
 from django.contrib.staticfiles.templatetags import staticfiles
 from easy_thumbnails.files import get_thumbnailer
+from registrasion.templatetags import registrasion_tags
 from symposion.conference import models as conference_models
 from symposion.schedule.models import Track
 
@@ -94,6 +95,7 @@ def gst(amount):
 def conference_name():
     return conference_models.Conference.objects.get(id=CONFERENCE_ID).title
 
+
 @register.filter()
 def trackname(room, day):
     try:
@@ -101,3 +103,47 @@ def trackname(room, day):
     except Track.DoesNotExist:
         track_name = None
     return track_name
+
+
+@register.simple_tag(takes_context=True)
+def ticket_type(context):
+
+    # Default to purchased ticket type (only item from category 1)
+    items = registrasion_tags.items_purchased(context, 1)
+
+    item = next(iter(items))
+    name = item.product.name
+    if name == "Conference Volunteer":
+        return "Volunteer"
+    elif name == "Conference Organiser":
+        return "Organiser"
+    else:
+        ticket_type = name
+
+
+    # Miniconfs are secion 2
+    # General sessions are section 1
+
+    user = registrasion_tags.user_for_context(context)
+
+    if hasattr(user, "speaker_profile"):
+        best = 0
+        for presentation in user.speaker_profile.presentations.all():
+            if presentation.section.id == 1:
+                best = 1
+            if best == 0 and presentation.section.id == 2:
+                best = 2
+        if best == 1:
+            return "Speaker"
+        elif best == 2:
+            return "Miniconf Org"
+
+    if name == "Sponsor":
+        return "Professional"
+    elif name == "Fairy Penguin Sponsor":
+        return "Professional"
+    elif name == "Monday and Tuesday Only":
+        return "Mon/Tue Only"
+
+    # Default to product type
+    return ticket_type
