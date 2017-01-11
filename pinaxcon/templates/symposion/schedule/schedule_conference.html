@@ -37,6 +37,20 @@
             {% endfor %}
           {% endfor %}
         </div>
+
+        {% if request.user.sessionrole_set.all %}
+          <br />
+          <h4>Session Volunteering</h4>
+          <p>You have signed up to volunteer at the following times. Click through to opt out.</p>
+          <ul>
+            {% for role in request.user.sessionrole_set.all %}
+            </a>
+              <li><a href="{% url "schedule_session_detail" role.session.id %}">{{ role.session }}</a></li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+
       </div>
 
       {% for section in sections %}

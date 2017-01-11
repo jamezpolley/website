@@ -41,9 +41,6 @@
                       {% if not session.chair %}
                         <br />
                         <a href="{% url "schedule_session_detail" session.id %}">Volunteer! ✨</a>
-                      {% elif session.chair.user == request.user %}
-                        <br />
-                        <a href="{% url "schedule_session_detail" session.id %}">(You are session chair)</a>
                       {% endif %}
                       </a>
                     {% endfor %}
