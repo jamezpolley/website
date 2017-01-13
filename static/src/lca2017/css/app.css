@@ -1700,6 +1700,19 @@ table.alt tr:not(:last-of-type) {
   }
 }
 
+.modal-dialog {
+	width: 80%;
+}
+
+.modal-backdrop {
+	z-index: 0;
+}
+
+.wiki iframe {
+	height: 800px !important;
+	width: 100%;
+}
+
 
 /* ------------------------------------------------------------------------------------------------
 
