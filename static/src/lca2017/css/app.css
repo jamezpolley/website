@@ -1614,6 +1614,11 @@ table.alt tr:not(:last-of-type) {
   margin-top: 2em;
 }
 
+.calendar .slot.Session,
+.calendar .slot.slot-talk {
+  vertical-align: top;
+}
+
 
 /* Schedule timetable for mobile */
 
@@ -1713,6 +1718,14 @@ table.alt tr:not(:last-of-type) {
 	width: 100%;
 }
 
+.wiki-article h1,
+.wiki-article h2,
+.wiki-article h3,
+.wiki-article h4,
+.wiki-article h5,
+.wiki-article h6 {
+  line-height: 1.5;
+}
 
 /* ------------------------------------------------------------------------------------------------
 
